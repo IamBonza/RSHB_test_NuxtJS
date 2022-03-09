@@ -30,7 +30,11 @@ header {
   }
   .theme-header {
     box-shadow: 0 4px 25px rgb(0 0 0 / 7%);
-    background: #ffffff
+    background: #ffffff;
+    @media only screen and (max-width: 720px) {
+      padding-left: 8px;
+      padding-right: 16px;
+    }
   }
   .container {
     display: flex;
