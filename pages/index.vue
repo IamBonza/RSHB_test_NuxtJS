@@ -24,7 +24,7 @@
         />
       </div>
         <ResumesList :resumesList="this.resumes" :pagination="paginationInfo" @loadMore="loadMore"/>
-  
+
     </div>
   </main>
 </template>
