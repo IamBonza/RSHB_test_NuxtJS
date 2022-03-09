@@ -1,0 +1,56 @@
+.theme-tag { @extend .grid--inline-block; }
+.theme-tag--card { @extend .lh--24, .p--x-02, .font--10, .font--weight-700, .font--ls-1, .border--radius-4, .w--max-36, .grid--block, .font--ellipsis, .grid--overflow-hidden; }
+.theme-tag--small { @extend .lh--24, .p--x-03, .font--10, .font--weight-500, .border--radius-5; }
+.theme-tag--main { @extend .color--adjective-light-green-bg, .color--gray-text; }
+.theme-tag--accent-warning { @extend .color--accent-warning-bg, .color--gray-text; }
+
+.theme-tag-button { @extend .grid--inline-flex, .grid--align-center, .animation--cursor-pointer, .border--radius-4; }
+.theme-tag-button--title { @extend .grid--flex, .grid--align-center, .line-height--none, .p--y-02, .p--x-05, .border--radius-4; }
+.theme-tag-button.checked .theme-tag-button--title { @extend .p--x-02; }
+.theme-tag-button--main { @extend .color--gray-background-bg, .color--gray-text; }
+// чтобы на мобилке не реагировать на hover
+@media (hover: hover) and (pointer: fine) {
+  .theme-tag-button--title:hover {
+    background: #42ab44 !important;
+    color: #ffffff !important;
+  }
+}
+.theme-tag-button--main.checked { @extend .color--general-default-bg, .color--gray-background; }
+.theme-tag-button--note { @extend .color--gray-label, .m--l-01, .font--12, .grid--self-end, .line-height--none; }
+.theme-tag-button--main:hover .theme-tag-button--note,
+.theme-tag-button--main.checked .theme-tag-button--note { @extend .color--gray-background; }
+.theme-tag-button--small { @extend .font--14; }
+.theme-tag-button--remove { @extend .line-height--none, .w--min-3; }
+
+.theme-tag--base-main { @extend .p--x-05, .p--y-03, .border--radius-40, .color--gray-background-bg, .border--gray-select-2, .font--14-16; }
+.theme-tag--base-main:hover { @extend .border--gray-stroke-2, .animation--cursor-pointer; }
+.theme-tag--base-main:active { @extend .color--adjective-light-green-bg, .border--green-stroke-2; }
+
+.theme-tag--status { @extend .p--x-03, .p--y-02, .border--radius-8, .font--14-16, .font--weight-500; }
+.theme-tag--status-gray { @extend .color--gray-header-bg, .color--gray-label; }
+.theme-tag--status-green { @extend .color--adjective-light-green-bg, .color--general-default; }
+.theme-tag--status-orange { @extend .color--adjective-light-orange-bg, .color--accent-caution; }
+.theme-tag--status-orange-2 { @extend .color--extended-orange, .color--extended-orange-bg; }
+.theme-tag--status-red { @extend .color--adjective-light-red-bg, .color--accent-danger; }
+.theme-tag--status-red-2 { @extend .color--accent-danger-bg, .color--gray-background; }
+.theme-tag--status-gray-2 { @extend .color--gray-label-bg, .color--gray-background; }
+.theme-tag--status-blue { @extend .color--adjective-light-blue-bg, .color--blue; }
+.theme-tag--status-transparent { @extend .color--badge-white-light-bg, .color--gray-background; }
+
+.theme-tag--rating { @extend .grid--flex-center; }
+.theme-tag--rating-large { @extend .font--12-20; }
+.theme-tag--rating-small { @extend .font--10-16; }
+
+.theme-tag--rating-number { @extend .color--general-default-bg, .color--gray-background, .font--weight-500, .grid--flex-all-center, .m--r-02; }
+.theme-tag--rating-number-large { @extend .border--radius-8, .w--7, .h--7; }
+.theme-tag--rating-number-small { @extend .border--radius-5, .w--5, .h--5; }
+
+.theme-tag--rating-marks { @extend .color--gray-subtitle; }
+
+.theme-tag--ellipse { @extend .border--radius-28, .p--02, .h--14, .grid--inline-flex, .grid--align-center; }
+
+.theme-tag--discount {
+  @extend .color--gray-background, .color--general-default-bg, .grid--inline-block, .p--01, .lh--11;
+
+  border-radius: 10px 2px; 
+}

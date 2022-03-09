@@ -1,0 +1,1511 @@
+openapi: 3.0.0
+info:
+  version: 1.2.0
+  title: hiring-api
+  description: Документация к сервису Работа (Подбор персонала) площадки Своё Фермерство
+servers:
+  - url: 'https://svoefermerstvo.test.devrshb.tech{endpoint}'
+    variables:
+      endpoint:
+        default: /api/hiring
+    description: Test
+    
+  - url: 'https://svoefermerstvo.ru{endpoint}'
+    variables:
+      endpoint:
+        default: /api/hiring
+    description: Production
+  
+  - url: 'https://svoefermerstvo.preprod.devrshb.tech{endpoint}'
+    variables:
+      endpoint:
+        default: /api/hiring
+    description: PreProd
+    
+  - url: 'https://svoefermerstvo.dev.devrshb.tech{endpoint}'
+    variables:
+      endpoint:
+        default: /api/hiring
+    description: Dev
+    
+  - url: 'http://localhost:8080{endpoint}'
+    variables:
+      endpoint:
+        default: /api/hiring
+    description: Local
+    
+
+paths:
+  #vacancies
+  /vacancy/:
+    get:
+      tags:
+      - hiring-api vacancy
+      summary: "Список всех вакансий"
+      
+      parameters:
+      - $ref: '#/components/parameters/size'
+      - $ref: '#/components/parameters/from'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/filters'
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+                schema:
+                  title: Пример ответа
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      default: 200
+                    result:
+                      type: object
+                      properties:
+                        total:
+                          type: integer
+                        vacancies:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              organization:
+                                type: integer
+                              suspicious:
+                                type: integer
+                              position:
+                                type: string
+                              status:
+                                type: string
+                              salary:
+                                type: number
+                              employment:
+                                type: string
+                              workplace:
+                                type: string
+                              housing:
+                                type: integer
+                              experience:
+                                type: string
+                              education:
+                                type: string
+                              schedule:
+                                type: string
+                              responsibilities:
+                                type: string
+                              requirements:
+                                type: string
+                              conditions:
+                                type: string
+                              published:
+                                type: string
+                              updated:
+                                type: string
+                              position_name:
+                                type: string
+                              foreign_worker:
+                                type: boolean
+                              organization_value:
+                                type: string
+                              position_value:
+                                type: string
+                              status_value:
+                                type: string
+                              employment_value:
+                                type: string
+                              workplace_value:
+                                type: string
+                              experience_value:
+                                type: string
+                              education_value:
+                                type: string
+                              region:
+                                type: string
+                              region_value:
+                                type: string
+                              import_source_id:
+                                type: string
+                              import_org_name:
+                                type: string
+                              import_org_url:
+                                type: string
+                              import_vacancy_url:
+                                type: string
+                              housing_value:
+                                type: string
+                              suspicious_value:
+                                type: string
+                              import_source_name:
+                                type: string
+                              tsk:
+                                type: string
+                        aggregations:
+                          type: object
+                          properties:
+                            max_salary:
+                              type: object
+                              properties:
+                                value:
+                                  type: number
+                            min_salary:
+                              type: object
+                              properties:
+                                value:
+                                  type: number
+        '400':
+          $ref: '#/components/responses/Bad'
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        '404':
+          $ref: '#/components/responses/Error'
+
+  /vacancy/{id}:
+    get:
+      tags:
+      - hiring-api vacancy
+      summary: "Конкретная вакансия"
+      
+      parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/size'
+      - $ref: '#/components/parameters/from'
+      
+      responses:
+        '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  title: Пример ответа
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      default: 200
+                    result:
+                      type: object
+                      properties:
+                        total:
+                          type: number
+                        vacancies:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              organization:
+                                type: number
+                              suspicious:
+                                type: number
+                              position:
+                                type: string
+                              status:
+                                type: string
+                              salary:
+                                type: number
+                              employment: 
+                                type: string
+                              workspace:
+                                type: string
+                              housing:
+                                type: number
+                              experience:
+                                type: string
+                              education:
+                                type: string
+                              schedule:
+                                type: string
+                              responsibilities:
+                                type: string
+                              requirements:
+                                type: string
+                              conditions:
+                                type: string
+                              published:
+                                type: string
+                              updated:
+                                type: string
+                              organization_value:
+                                type: string
+                              position_value:
+                                type: string
+                              status_value:
+                                type: string
+                              employment_value:
+                                type: string
+                              workspace_value:
+                                type: string
+                              experience_value:
+                                type: string
+                              education_value:
+                                type: string
+                              import_source_id:
+                                type: string
+                              import_org_name:
+                                type: string
+                              import_org_url:
+                                type: string
+                              import_vacancy_url:
+                                type: string
+                              housing_value:
+                                type: string
+                              suspicious_value:
+                                type: string
+                              import_source_name:
+                                type: string
+                              tsk:
+                                type: number
+        '400':
+          $ref: '#/components/responses/Bad'
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        '404':
+          $ref: '#/components/responses/Error'
+
+  #resumes
+  /resume/:
+    get:
+      tags:
+      - hiring-api resume
+      summary: "Список всех резюме"
+      
+      parameters:
+      - $ref: '#/components/parameters/size'
+      - $ref: '#/components/parameters/from'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/filters'
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+                schema:
+                  title: Пример ответа
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      default: 200
+                    result:
+                      type: object
+                      properties:
+                        total:
+                          type: integer
+                        resumes:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              customer_id:
+                                type: integer
+                              birth_date:
+                                type: string
+                              desired_position:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: integer
+                                    resume_id:
+                                      type: integer
+                                    desired_position:
+                                      type: string
+                                    desired_position_id:
+                                      type: string
+                                    desired_position_name:
+                                      type: string
+                              citizenship:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: integer
+                                    resume_id:
+                                      type: integer
+                                    country:
+                                      type: string
+                                    country_id:
+                                      type: string
+                              driving_license:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                  resume_id:
+                                    type: integer
+                                  a_category:
+                                    type: integer
+                                  b_category:
+                                    type: integer
+                                  c_category:
+                                    type: integer
+                                  d_category:
+                                    type: integer
+                                  e_category:
+                                    type: integer
+                                  f_category:
+                                    type: integer
+                              education:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                  resume_id:
+                                    type: integer
+                                  education:
+                                    type: string
+                                  education_id:
+                                    type: string
+                                  education_facility:
+                                    type: string
+                                  end_date:
+                                    type: string
+                              experience:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: integer
+                                    resume_id:
+                                      type: integer
+                                    job_facility:
+                                      type: string
+                                    position:
+                                      type: string
+                                    position_id:
+                                      type: string
+                                    start_date:
+                                      type: string
+                                    end_date:
+                                      type: string
+                                    for_now:
+                                      type: integer
+                                    job_desc:
+                                      type: string
+                                    position_name:
+                                      type: string
+                              family:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                  resume_id:
+                                    type: integer
+                                  family_id:
+                                    type: string
+                                  family:
+                                    type: string
+                                  children_count:
+                                    type: integer
+                                  adult_count:
+                                    type: integer
+                              language:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: integer
+                                    resume_id:
+                                      type: integer
+                                    language:
+                                      type: string
+                                    language_id:
+                                      type: string
+                              photo:
+                                type: string
+                              residence_id:
+                                type: string
+                              residence:
+                                type: string
+                              region_id:
+                                type: string
+                              region:
+                                type: string
+                              relocation:
+                                type: integer
+                              medical_cert:
+                                type: integer
+                              description:
+                                type: string
+                              salary:
+                                type: number
+                              employment_type_id:
+                                type: string
+                              employment_type:
+                                type: string
+                              with_lodging:
+                                type: integer
+                              status_id:
+                                type: string
+                              status:
+                                type: string
+                              pub_date:
+                                type: string
+                              update_date:
+                                type: string
+                              suspicious:
+                                type: integer
+                              tsk:
+                                type: integer
+                        aggregations:
+                          type: object
+                          properties:
+                            max_salary:
+                              type: object
+                              properties:
+                                value:
+                                  type: number
+                            min_salary:
+                              type: object
+                              properties:
+                                value:
+                                  type: number
+        '400':
+          $ref: '#/components/responses/Bad'
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        '404':
+          $ref: '#/components/responses/Error'
+
+  /resume/{id}:
+    get:
+      tags:
+      - hiring-api resume
+      summary: "Конкретное резюме"
+      
+      parameters:
+      - $ref: '#/components/parameters/id'
+      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+                schema:
+                  title: Пример ответа
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      default: 200
+                    result:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        customer_id:
+                          type: integer
+                        birth_date:
+                          type: string
+                        desired_position:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              resume_id:
+                                type: integer
+                              desired_position:
+                                type: string
+                              desired_position_id:
+                                type: string
+                              desired_position_name:
+                                type: string
+                        citizenship:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              resume_id:
+                                type: integer
+                              country:
+                                type: string
+                              country_id:
+                                type: string
+                        driving_license:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            resume_id:
+                              type: integer
+                            a_category:
+                              type: integer
+                            b_category:
+                              type: integer
+                            c_category:
+                              type: integer
+                            d_category:
+                              type: integer
+                            e_category:
+                              type: integer
+                            f_category:
+                              type: integer
+                        education:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            resume_id:
+                              type: integer
+                            education:
+                              type: string
+                            education_id:
+                              type: string
+                            education_facility:
+                              type: string
+                            end_date:
+                              type: string
+                        experience:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                  resume_id:
+                                    type: integer
+                                  job_facility:
+                                    type: string
+                                  position:
+                                    type: string
+                                  position_id:
+                                    type: string
+                                  start_date:
+                                    type: string
+                                  end_date:
+                                    type: string
+                                  for_now:
+                                    type: integer
+                                  job_desc:
+                                    type: string
+                                  position_name:
+                                    type: string
+                        family:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            resume_id:
+                              type: integer
+                            family_id:
+                              type: string
+                            family:
+                              type: string
+                            children_count:
+                              type: integer
+                            adult_count:
+                              type: integer    
+                        language:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                resume_id:
+                                  type: integer
+                                language:
+                                  type: string
+                                language_id:
+                                      type: string           
+                        photo:
+                          type: string
+                        residence_id:
+                          type: string
+                        residence:
+                          type: string
+                        region_id:
+                          type: string
+                        region:
+                          type: string
+                        relocation:
+                          type: integer
+                        medical_cert:
+                          type: integer
+                        description:
+                          type: string
+                        salary:
+                          type: number
+                        employment_type_id:
+                          type: string
+                        employment_type:
+                          type: string
+                        with_lodging:
+                          type: integer
+                        status_id:
+                          type: string
+                        status:
+                          type: string
+                        pub_date:
+                          type: string
+                        update_date:
+                          type: string
+                        suspicious:
+                          type: integer
+                        tsk:
+                          type: integer
+        '400':
+          $ref: '#/components/responses/Bad'
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        '404':
+          $ref: '#/components/responses/Error'
+
+  /resume/contact/{id}:
+    get:
+      tags:
+      - hiring-api resume
+      summary: "Контакты конкретного резюме"
+      
+      parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/token'
+      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+                schema:
+                  title: Пример ответа
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      default: 200
+                    result:
+                      type: object
+                      properties:
+                        first_name:
+                          type: string
+                        middle_name:
+                          type: string
+                        last_name:
+                          type: string
+                        phone:
+                          type: number
+                        email:
+                          type: string
+        '400':
+          $ref: '#/components/responses/Bad'
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        '404':
+          $ref: '#/components/responses/Error'
+
+  #user
+  /user/vacancy:
+    get:
+      tags:
+      - hiring-api user vacancy
+      summary: "Список всех вакансий пользователя"
+      
+      parameters:
+      - $ref: '#/components/parameters/token'
+      - $ref: '#/components/parameters/organization'
+      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+                schema:
+                  title: Пример ответа
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      default: 200
+                    result:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          salary:
+                            type: integer
+                          housing:
+                            type: integer
+                          schedule:
+                            type: string
+                          responsibilities:
+                            type: string
+                          requirements:
+                            type: string
+                          conditions:
+                            type: string
+                          published:
+                            type: string
+                          updated:
+                            type: string
+                          organization:
+                            type: integer
+                          position:
+                            type: string
+                          position_name:
+                            type: string
+                          employment:
+                            type: string
+                          workplace:
+                            type: string
+                          experience:
+                            type: string
+                          education:
+                            type: string
+                          status:
+                            type: string
+                          suspicious:
+                            type: integer
+                          organization_value:
+                            type: string
+                          position_value:
+                            type: string
+                          employment_value:
+                            type: string
+                          workplace_value:
+                            type: string
+                          experience_value:
+                            type: string
+                          education_value:
+                            type: string
+                          status_value:
+                            type: string
+                          suspicious_value:
+                            type: string
+                          housing_value:
+                            type: string
+                          import_source_id:
+                            type: string
+                          import_source_name:
+                            type: string
+                          import_org_name:
+                            type: string
+                          import_org_url:
+                            type: string
+                          import_vacancy_url:
+                            type: string
+                          region:
+                            type: string
+                          region_value:
+                            type: string
+                          foreign_worker:
+                            type: integer
+        '400':
+          $ref: '#/components/responses/Bad'
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        '404':
+          $ref: '#/components/responses/Error'
+    
+    post:
+      tags:
+      - hiring-api user vacancy
+      summary: "Создание вакансии"
+      
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/token'
+                - $ref: '#/components/schemas/vacancy'
+                
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/feedback'
+        '400':
+          $ref: '#/components/responses/Bad'
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        '404':
+          $ref: '#/components/responses/Error'
+
+  /user/vacancy/{id}:
+    get:
+      tags:
+      - hiring-api user vacancy
+      summary: "Конкретная вакансия пользователя"
+      
+      parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/token'
+      
+      responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  title: Пример ответа
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      default: 200
+                    result:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        salary:
+                          type: number
+                        housing:
+                          type: number
+                        schedule:
+                          type: string
+                        responsibilities:
+                          type: string
+                        requirements:
+                          type: string
+                        conditions:
+                          type: string
+                        published:
+                          type: string
+                        updated:
+                          type: string
+                        organization:
+                          type: number
+                        position:
+                          type: string
+                        position_name:
+                          type: string
+                        employment: 
+                          type: string
+                        workplace:
+                          type: string
+                        experience:
+                          type: string
+                        education:
+                          type: string
+                        status:
+                          type: string
+                        suspicious:
+                          type: number
+                        organization_value:
+                          type: string
+                        position_value:
+                          type: string
+                        employment_value:
+                          type: string
+                        workplace_value:
+                          type: string
+                        experience_value:
+                          type: string
+                        education_value:
+                          type: string
+                        status_value:
+                          type: string
+                        suspicious_value:
+                          type: string
+                        housing_value:
+                          type: string
+                        import_source_id:
+                          type: string
+                        import_source_name:
+                          type: string
+                        import_org_name:
+                          type: string
+                        import_org_url:
+                          type: string
+                        import_vacancy_url:
+                          type: string
+                        region:
+                          type: string
+                        region_value:
+                          type: string
+                        foreign_worker:
+                          type: integer
+          '400':
+           $ref: '#/components/responses/Bad'
+          '401':
+            $ref: '#/components/responses/UnAuthorized'
+          '404':
+            $ref: '#/components/responses/Error'
+
+    put:
+      tags:
+      - hiring-api user vacancy
+      summary: "Редактирование вакансии"
+      
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/vacancy'
+                
+      parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/token'
+      
+      responses:
+          '200':
+            $ref: '#/components/responses/OK'
+          '400':
+           $ref: '#/components/responses/Bad'
+          '401':
+            $ref: '#/components/responses/UnAuthorized'
+          '404':
+            $ref: '#/components/responses/Error'
+
+  /user/resume:
+    get:
+      tags:
+      - hiring-api user resume
+      summary: "Резюме пользователя"
+      
+      parameters:
+      - $ref: '#/components/parameters/token'
+      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+                schema:
+                  title: Пример ответа
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      default: 200
+                    result:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        customer_id:
+                          type: integer
+                        first_name:
+                          type: string
+                        middle_name:
+                          type: string
+                        last_name:
+                          type: string
+                        birth_date:
+                          type: string
+                        desired_position:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              resume_id:
+                                type: integer
+                              desired_position:
+                                type: string
+                              desired_position_id:
+                                type: string
+                              desired_position_name:
+                                type: string
+                        citizenship:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              resume_id:
+                                type: integer
+                              country:
+                                type: string
+                              country_id:
+                                type: string
+                        driving_license:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            resume_id:
+                              type: integer
+                            a_category:
+                              type: integer
+                            b_category:
+                              type: integer
+                            c_category:
+                              type: integer
+                            d_category:
+                              type: integer
+                            e_category:
+                              type: integer
+                            f_category:
+                              type: integer
+                        education:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            resume_id:
+                              type: integer
+                            education:
+                              type: string
+                            education_id:
+                              type: string
+                            education_facility:
+                              type: string
+                            end_date:
+                              type: string
+                        experience:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              resume_id:
+                                type: integer
+                              job_facility:
+                                type: string
+                              position:
+                                type: string
+                              position_id:
+                                type: string
+                              start_date:
+                                type: string
+                              end_date:
+                                type: string
+                              for_now:
+                                type: integer
+                              job_desc:
+                                type: string
+                              position_name:
+                                type: string
+                        family:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            resume_id:
+                              type: integer
+                            family_id:
+                              type: string
+                            family:
+                              type: string
+                            children_count:
+                              type: integer
+                            adult_count:
+                              type: integer
+                        language:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              resume_id:
+                                type: integer
+                              language:
+                                type: string
+                              language_id:
+                                type: string
+                        photo:
+                          type: string
+                        phone:
+                          type: string
+                        email:
+                          type: string
+                        residence_id:
+                          type: string
+                        residence:
+                          type: string
+                        region_id:
+                          type: string
+                        region:
+                          type: string
+                        relocation:
+                          type: integer
+                        medical_cert:
+                          type: integer
+                        description:
+                          type: string
+                        salary:
+                          type: number
+                        employment_type_id:
+                          type: string
+                        employment_type:
+                          type: string
+                        with_lodging:
+                          type: integer
+                        status_id:
+                          type: string
+                        status:
+                          type: string
+                        pub_date:
+                          type: string
+                        update_date:
+                          type: string
+                        suspicious:
+                          type: integer          
+        '400':
+          $ref: '#/components/responses/Bad'
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        '404':
+          $ref: '#/components/responses/Error'
+
+    post:
+      tags:
+      - hiring-api user resume
+      summary: "Создание и редактирование резюме"
+      
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/token'
+              - $ref: '#/components/schemas/resume'
+              
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/feedback'
+        '400':
+          $ref: '#/components/responses/Bad'
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        '404':
+          $ref: '#/components/responses/Error'
+
+  /feedback/for-my-vacancies:
+    get:
+      tags:
+      - hiring-api feedback
+      summary: "Отклики на вакансии пользователя"
+       
+      parameters:
+      - $ref: '#/components/parameters/token'
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+                schema:
+                  title: Пример ответа
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      default: 200
+                    result:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          resume_id:
+                            type: integer
+                          customer_id:
+                            type: integer
+                          vacancy_id:
+                            type: integer
+                          status:
+                            type: string
+                          place_date:
+                            type: string
+        '400':
+          $ref: '#/components/responses/Bad'
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        '404':
+          $ref: '#/components/responses/Error'
+          
+  /feedback/my:
+    get:
+      tags:
+      - hiring-api feedback
+      summary: "Отклики на резюме пользователя"
+       
+      parameters:
+      - $ref: '#/components/parameters/token'
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+                schema:
+                  title: Пример ответа
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      default: 200
+                    result:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          resume_id:
+                            type: integer
+                          customer_id:
+                            type: integer
+                          vacancy_id:
+                            type: integer
+                          status:
+                            type: string
+                          place_date:
+                            type: string
+        '400':
+          $ref: '#/components/responses/Bad'
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        '404':
+          $ref: '#/components/responses/Error'
+
+    post:
+      tags:
+      - hiring-api feedback
+      summary: "Откликнуться на вакансию"
+       
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/token'
+              - $ref: '#/components/schemas/feedback'
+                
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/feedback'
+        '400':
+          $ref: '#/components/responses/Bad'
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        '404':
+          $ref: '#/components/responses/Error'
+
+  /marathon/organizations:
+    get:
+      tags:
+      - hiring-api marathon
+      summary: "Страница марафона"
+       
+      parameters:
+      - $ref: '#/components/parameters/sort'
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+                schema:
+                  title: Пример ответа
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      default: 200
+                    result:
+                      type: object
+                      properties:
+                        organizations:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              organization_id:
+                                type: integer
+                              name:
+                                type: string
+                              description:
+                                type: string
+                              logo_url:
+                                type: string
+                              video_id:
+                                type: string
+                              enabled:
+                                type: integer
+                              tsk:
+                                type: string
+        '400':
+          $ref: '#/components/responses/Bad'
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        '404':
+          $ref: '#/components/responses/Error'
+
+#Organization
+  /organization/{id}: 
+    get:
+      tags:
+      - hiring-api organization
+      
+      parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/size'
+      - $ref: '#/components/parameters/from'
+      - $ref: '#/components/parameters/filters'
+      
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+                schema:
+                  title: Пример ответа
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      default: 200
+                    result:
+                      type: object
+                      properties:
+                        organization_id:
+                          type: string
+                        inn:
+                          type: string
+                        name:
+                          type: string
+                        details:
+                          type: object
+                          properties:
+                            phone:
+                              type: string
+                            email:
+                              type: string
+        '400':
+          $ref: '#/components/responses/Bad'
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        '404':
+          $ref: '#/components/responses/Error'
+          
+
+security:
+  - bearerAuth: []          
+components:
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    token:
+      type: string
+      description: Токен
+    
+    feedback:
+      type: object
+      description: Обратная связь
+      
+    resume:
+      type: object
+      description: Резюме
+    vacancy:
+      type: object
+      description: Вакансия
+      
+  parameters:
+    token:
+      name: token
+      in: query
+      description: Token
+      schema:
+        type: string
+        
+    id:
+      name: id
+      in: path
+      required: true
+      description: Id
+      schema:
+        type: string
+        
+    size:
+      name: size
+      description: Количество возвращаемых записей
+      in: query
+      schema:
+        type: integer
+        default: 1
+        
+    from:
+      name: from
+      in: query
+      description: Начальный индекс
+      schema:
+        type: integer
+        default: 0
+
+    filters:
+      name: filters
+      in: query
+      schema:
+        type: string
+        
+    search:
+      name: search
+      in: query
+      description: Поиск значения
+      schema:
+        type: string
+        
+    organization:
+      name: organization
+      in: query
+      description: Организация
+      schema:
+        type: integer
+        
+    sort:
+      name: sort
+     # description: Сортировка
+      in: query
+      schema:
+        type: string
+        enum: [asc , desc]
+      description: >
+        Сортировка:
+          * `asc` - Сортировка по возрастанию даты
+          * `desc` - Сортировка по убыванию даты
+        
+  responses:
+    OK:
+      description: OK
+      
+    UnAuthorized:
+      description: Authorization information is missing or invalid.
+      
+    Error:
+      description: Not found
+      
+    Bad:
+      description: Bad request.
