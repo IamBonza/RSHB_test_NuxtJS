@@ -5,9 +5,9 @@
       <div>
         <div class="theme-card--resume border--gray-stroke-1 m--b-05 resume-card-container" v-for="resume in resumesList">
           <div class="grid--row">
-            <div class="mobile--12 tablet--2 desktop--1">
+            <div class="mobile--12 tablet--2 desktop--1 photoBlock">
               <div class="theme-card--resume-photo">
-                <img src="http://uikit.test.devrshb.tech/img/rshb-vue-kit-user-avatar.40b1ee27.svg" alt="photo">
+                <img src="../static/rshb-vue-kit-user-avatar.40b1ee27.svg" alt="photo">
               </div>
             </div>
             <div class="grid--flex grid--flex-column mobile--12 tablet--10 desktop--8">
@@ -35,14 +35,14 @@
           </div>
           <div class="grid--row">
             <div class="mobile--12 tablet--2 desktop--1"></div>
-            <div class="grid--flex-center mobile--12 tablet--10 desktop--3 tablet--offset-2">
+            <div class="grid--flex-center mobile--12 tablet--10 desktop--3 tablet--offset-2 additionalInfo">
               <div class="theme-card--resume-icon"></div>
               <div class="grid--flex grid--flex-column">
                 <span class="color--gray-label font--normal font--12-16">{{ resume.region }}</span>
                 <span class="color--gray-text font--bolder font--14-20">{{ resume.residence }}</span>
               </div>
             </div>
-            <div class="grid--flex-center mobile--12 tablet--10 desktop--4 tablet--offset-2" v-if="resume.with_lodging">
+            <div class="grid--flex-center mobile--12 tablet--10 desktop--4 tablet--offset-2 additionalInfo" v-if="resume.with_lodging">
               <div class="theme-card--resume-icon"></div>
               <span class="color--gray-text font--bolder font--14-20">Ищу работу с проживанием</span>
             </div>
@@ -98,6 +98,16 @@
     right: 16px;
   }
 
+}
+.additionalInfo {
+  @media screen and (max-width: 1440px) {
+    margin-bottom: 16px;
+  }
+}
+.photoBlock {
+  @media screen and (max-width: 720px) {
+    display: none;
+  }
 }
 
 </style>
